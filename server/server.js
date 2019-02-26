@@ -35,19 +35,11 @@ app.get('/todos', (req, res) => {
 
 app.get('/todos/:id', (req, res) => {
   var id = req.params.id;
-
-  // valid id using isvalid
-    // 404 -send back empty send
+  
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
 
-  // findbyid
-    //succes
-      // if todo - send it back
-      // if no todo - send back 404
-    // error
-      // 400 - send empty body bac
   Todo.findById(id).then((todo) => {
     if (!todo) {
       return res.status(404).send();
